@@ -44,14 +44,24 @@ if g:auto_create_directory && !isdirectory(expand(g:osplug_dir))
 endif
 "  1}}}
 
+" File Creation Settings {{{
+if !exists('g:auto_create_file')
+    let g:auto_create_file = 0
+endif
+
+if g:auto_create_file
+    if g:windows && !filereadable(expand(g:osplug_dir) . "\\" . expand(g:windows_filename))
+        silent execute "!type NUL > " . expand(g:osplug_dir) . "\\" . expand(g:windows_filename)
+    endif
+endif
+" }}}
+
 " File Sourcing Settings {{{
-if g:linux && filereadable(expand(g:osplug_dir) . "\/" . expand(g:windows_filename))
-    execute "source" expand(g:osplug_dir) . "\\" . expand(g:windows_filename)
-endif
-if g:macOS && filereadable(expand(g:osplug_dir) . "\/" . expand(g:windows_filename))
-    execute "source" expand(g:osplug_dir) . "\/" . expand(g:windows_filename)
-endif
-if g:windows && filereadable(expand(g:osplug_dir) . "\/" . expand(g:windows_filename))
-    execute "source" expand(g:osplug_dir) . "\/" . expand(g:windows_filename)
+if g:linux && filereadable(expand(g:osplug_dir) . "\/" . expand(g:linux_filename))
+    execute "source " . expand(g:osplug_dir) . "\/" . expand(g:linux_filename)
+elseif g:windows && filereadable(expand(g:osplug_dir) . "\\" . expand(g:windows_filename))
+    execute "source " . expand(g:osplug_dir) . "\\" . expand(g:windows_filename)
+elseif g:macOS && filereadable(expand(g:osplug_dir) . "\/" . expand(g:macOS_filename))
+    execute "source " . expand(g:osplug_dir) . "\/" . expand(g:macOS_filename)
 endif
 " }}}
