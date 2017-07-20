@@ -1,9 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
   finish
 endif
-let g:loaded_osplugin = "0.4.0"
-let s:keepcpo         = &cpo
-set cpo&vim
+let g:loaded_osplugin = "0.4.1"
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -113,6 +111,3 @@ function! osplugin#error(error_number)
     endif
 endfunction
 "  1}}}
-
-let &cpo= s:keepcpo
-unlet s:keepcpo
