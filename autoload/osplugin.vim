@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
-  finish
+    finish
 endif
-let g:loaded_osplugin = "0.5.0"
+let g:loaded_osplugin = "0.5.1"
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -41,16 +41,36 @@ if !exists('g:linux_filename')
 endif
 
 if !exists('g:windows_filename')
-    let g:windows_filename = "windows"
+    let g:windows_filename = "windows.vim"
 endif
 
 if !exists('g:macOS_filename')
-    let g:macOS_filename = "macOS"
+    let g:macOS_filename = "macOS.vim"
 endif
 " }}}
 
+" Function to Call outside of the autload file {{{1
+function! osplugin#begin(...)
+    if !exists('s:osplugin_custom_config')
+        let s:osplugin_custom_config = 0
+    endif
+    if !exists('s:osplugin_custom_name')
+        let s:osplugin_custom_name = ''
+    endif
+
+    if s:osplugin_custom_config == 1
+        call osplugin#main(s:osplugin_custom_name)
+    elseif exists('a:1')
+        let s:osplugin_custom_config = 1
+        let s:osplugin_custom_name = a:1
+    else
+        call osplugin#main()
+    endif
+endfunction
+"  1}}}
+
 " Main Function {{{1
-function! osplugin#initilize(...)
+function! osplugin#main(...)
     if g:auto_create_directory
         call osplugin#make_osplugin_directory()
     endif
@@ -93,9 +113,8 @@ function! osplugin#initilize_os(os_filename)
         call s:osplugin#make_osplugin_file(a:os_filename)
     endif
 
-    if filereadable(expand(g:osplugin_dir) . "\/" . expand(a:os_filename) . ".vim")
-        execute "source " . expand(g:osplugin_dir) . "\/"
-            \ . expand(a:os_filename) . ".vim"
+    if filereadable(expand(g:osplugin_dir) . "\/" . expand(a:os_filename))
+        execute "source " . expand(g:osplugin_dir) . "\/" . expand(a:os_filename)
     elseif g:osplugin_debug
         call osplugin#error(2)
     endif
