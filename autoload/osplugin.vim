@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
   finish
 endif
-let g:loaded_osplugin = "0.4.1"
+let g:loaded_osplugin = "0.5.0"
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -111,3 +111,5 @@ function! osplugin#error(error_number)
     endif
 endfunction
 "  1}}}
+
+" vim: set expandtab softtabstop=4 shiftwidth=4 foldmethod=marker:
