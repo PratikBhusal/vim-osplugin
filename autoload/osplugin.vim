@@ -52,7 +52,7 @@ endif
 " }}}
 
 " Main Function {{{1
-function! osplugin#initilize()
+function! osplugin#initilize(...)
     if g:auto_create_directory
         call osplugin#make_osplugin_directory()
     endif
