@@ -39,17 +39,15 @@ if !exists('g:osplugin_dir')
 endif
 
 if !exists('g:linux_filename')
-    let g:linux_filename = "linux.vim"
+    let g:linux_filename = "linux"
 endif
 
 if !exists('g:windows_filename')
-    let g:windows_filename = "windows.vim"
+    let g:windows_filename = "windows"
 endif
 
-
-
 if !exists('g:macOS_filename')
-    let g:macOS_filename = "macOS.vim"
+    let g:macOS_filename = "macOS"
 endif
 " }}}
 
