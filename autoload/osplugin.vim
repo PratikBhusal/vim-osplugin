@@ -57,12 +57,14 @@ function! osplugin#initilize(...)
         call osplugin#make_osplugin_directory()
     endif
 
-    if g:linux
-        call osplugin#initilize_linux()
+    if exists('a:1')
+        call osplugin#initilize_os(a:1)
+    elseif g:linux
+        call osplugin#initilize_os(g:linux_filename)
     elseif g:macOS
-        call osplugin#initilize_macOS()
+        call osplugin#initilize_os(g:macOS_filename)
     elseif g:windows
-        call osplugin#initilize_windows()
+        call osplugin#initilize_os(g:windows_filename)
     elseif g:osplugin_debug
         call osplugin#error(1)
     endif
@@ -87,47 +89,20 @@ function! osplugin#make_osplugin_file(os_filename)
 endfunction
 " }}}
 
-" Linux Settings {{{1
-function! osplugin#initilize_linux()
+" OS Config File Sourcing {{{
+function! osplugin#initilize_os(os_filename)
     if g:auto_create_file
-        call osplugin#make_osplugin_file(g:linux_filename)
+        call s:osplugin#make_osplugin_file(a:os_filename)
     endif
 
-    if filereadable(expand(g:osplugin_dir) . "\/" . expand(g:linux_filename))
-        execute "source " . expand(g:osplugin_dir) . "\/" . expand(g:linux_filename)
+    if filereadable(expand(g:osplugin_dir) . "\/" . expand(a:os_filename) . ".vim")
+        execute "source " . expand(g:osplugin_dir) . "\/"
+            \ . expand(a:os_filename) . ".vim"
     elseif g:osplugin_debug
         call osplugin#error(2)
     endif
 endfunction
-"  1}}}
-
-" Windows Settings {{{1
-function! osplugin#initilize_windows()
-    if g:auto_create_file
-        call osplugin#make_osplugin_file(g:windows_filename)
-    endif
-
-    if filereadable(expand(g:osplugin_dir) . "\/" . expand(g:windows_filename))
-        execute "source " . expand(g:osplugin_dir) . "\/" . expand(g:windows_filename)
-    elseif g:osplugin_debug
-        call osplugin#error(2)
-    endif
-endfunction
-"  1}}}
-
-" MacOS Settings {{{1
-function! osplugin#initilize_macOS()
-    if g:auto_create_file
-        call osplugin#make_osplugin_file(g:macOS_filename)
-    endif
-
-   if g:macOS && filereadable(expand(g:osplugin_dir) . "\/" . expand(g:macOS_filename))
-        execute "source " . expand(g:osplugin_dir) . "\/" . expand(g:macOS_filename)
-    elseif g:osplugin_debug
-        call osplugin#error(2)
-    endif
-endfunction
-"  1}}}
+" }}}
 
 " Error Function {{{1
 function! osplugin#error(error_number)
