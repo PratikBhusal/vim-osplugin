@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
   finish
 endif
-let g:loaded_osplugin = 1
+let g:loaded_osplugin = "0.4.0"
 let s:keepcpo         = &cpo
 set cpo&vim
 
