@@ -1,5 +1,5 @@
-# vim-osplugin
-A plugin that sources os-specific configuration files
+vim-osplugin: Easily source os-specific configuration files
+===========================================================
 
 # Installation
 
