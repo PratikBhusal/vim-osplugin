@@ -1,10 +1,11 @@
-vim-osplugin: Easily source os-specific configuration files
+vim-osplugin: Easily source OS-specific configuration files
 ===========================================================
 
 Table of Contents
 -----------------
 - [Installation](#installation)
 - [Todo](#todo)
+- [License](#license)
 
 Installation
 ------------
@@ -20,3 +21,12 @@ Todo
 ----
 - Bugfix on Linux and MacOS
 - Add documentation
+
+License
+-------
+MIT License. Copyright © 2017 Pratik Bhusal & Contributors.
+
+[dein]: https://github.com/Shougo/dein.vim
+[pathogen]: https://github.com/tpope/vim-pathogen
+[plug]: https://github.com/junegunn/vim-plug
+[vundle]: https://github.com/VundleVim/Vundle.vim
