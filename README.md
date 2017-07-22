@@ -15,11 +15,11 @@ Installation
 --------------------------------------------------------------------------------
 | Plugin Manager | Install with... |
 | -------------- | --------------- |
-| [Dein][dein]           | `call dein#add('PratikBhusal/vim-osplugin')` |
-| [Pathogen][pathogen]   | `git clone https://github.com/PratikBhusal/vim-osplugin ~/.vim/bundle/vim-osplugin`|
-| [Plug][plug]           | `Plug 'PratikBhusal/vim-osplugin'`           |
-| [Vundle][vundle]       | `Plugin 'PratikBhusal/vim-osplugin'`         |
-| Manual                 | Put the files into your `~/.vim` directory   |
+| [Dein]     | `call dein#add('PratikBhusal/vim-osplugin')` |
+| [Pathogen] | `git clone https://github.com/PratikBhusal/vim-osplugin ~/.vim/bundle/vim-osplugin`|
+| [Plug]     | `Plug 'PratikBhusal/vim-osplugin'`           |
+| [Vundle]   | `Plugin 'PratikBhusal/vim-osplugin'`         |
+| Manual     | Put the files into your `~/.vim` directory   |
 
 Variables
 --------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ License
 --------------------------------------------------------------------------------
 MIT License. Copyright © 2017 Pratik Bhusal & Contributors.
 
-[dein]: https://github.com/Shougo/dein.vim
-[pathogen]: https://github.com/tpope/vim-pathogen
-[plug]: https://github.com/junegunn/vim-plug
-[vundle]: https://github.com/VundleVim/Vundle.vim
+[Dein]: https://github.com/Shougo/dein.vim
+[Pathogen]: https://github.com/tpope/vim-pathogen
+[Plug]: https://github.com/junegunn/vim-plug
+[Vundle]: https://github.com/VundleVim/Vundle.vim
