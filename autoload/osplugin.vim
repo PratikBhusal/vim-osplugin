@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
     finish
 endif
-let g:loaded_osplugin = "0.5.2"
+let g:loaded_osplugin = "0.5.3"
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -47,17 +47,17 @@ endif
 if !exists('g:macOS_filename')
     let g:macOS_filename = "macOS.vim"
 endif
+
+if !exists('s:osplugin_custom_config')
+    let s:osplugin_custom_config = 0
+endif
+if !exists('s:osplugin_custom_name')
+    let s:osplugin_custom_name = ''
+endif
 " }}}
 
 " Function to Call outside of the autload file {{{1
 function! osplugin#begin(...)
-    if !exists('s:osplugin_custom_config')
-        let s:osplugin_custom_config = 0
-    endif
-    if !exists('s:osplugin_custom_name')
-        let s:osplugin_custom_name = ''
-    endif
-
     if s:osplugin_custom_config == 1
         call osplugin#main(s:osplugin_custom_name)
         if exists('a:1')
