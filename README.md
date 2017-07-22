@@ -6,6 +6,10 @@ Table of Contents
 - [Installation](#installation)
 - [Todo](#todo)
 - [License](#license)
+- [Variables](#variables)
+- [Autoload Functions](#autoload-functions)
+- [Custom File Sourcing](#custom-file-sourcing)
+- [FAQ](#faq)
 
 Installation
 --------------------------------------------------------------------------------
