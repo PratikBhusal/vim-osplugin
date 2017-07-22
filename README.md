@@ -6,11 +6,11 @@ Table of Contents
 - [Installation](#installation)
 - [Feature Summary](#feature-summary)
 - [Todo](#todo)
-- [License](#license)
 - [Options](#options)
 - [Functions](#functions)
 - [Custom File Sourcing](#custom-file-sourcing)
 - [FAQ](#faq)
+- [License](#license)
 
 Installation
 --------------------------------------------------------------------------------
