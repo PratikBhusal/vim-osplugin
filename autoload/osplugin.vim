@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
     finish
 endif
-let g:loaded_osplugin = "0.5.1"
+let g:loaded_osplugin = "0.5.2"
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -60,6 +60,9 @@ function! osplugin#begin(...)
 
     if s:osplugin_custom_config == 1
         call osplugin#main(s:osplugin_custom_name)
+        if exists('a:1')
+            let s:osplugin_custom_name = a:1
+        endif
     elseif exists('a:1')
         let s:osplugin_custom_config = 1
         let s:osplugin_custom_name = a:1
@@ -116,17 +119,17 @@ function! osplugin#initilize_os(os_filename)
     if filereadable(expand(g:osplugin_dir) . "\/" . expand(a:os_filename))
         execute "source " . expand(g:osplugin_dir) . "\/" . expand(a:os_filename)
     elseif g:osplugin_debug
-        call osplugin#error(2)
+        call osplugin#error(2, a:os_filename)
     endif
 endfunction
 " }}}
 
 " Error Function {{{1
-function! osplugin#error(error_number)
+function! osplugin#error(error_number, ...)
     if a:error_number == 1
         echom "Error 1: Could not determine operating system."
     elseif a:error_number == 2
-        echom "Error 2: Could not source the config file. Is the file readable?"
+        echom "Error 2: Could not source " . a:1 . ". Is the file readable?"
     endif
 endfunction
 "  1}}}
