@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
     finish
 endif
-let g:loaded_osplugin = "0.5.3"
+let g:loaded_osplugin = "0.5.4"
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -21,7 +21,7 @@ if !exists('g:macOS')
 endif
 
 if !exists('g:linux_filename')
-    let g:linux_filename = "linux"
+    let g:linux_filename = "linux.vim"
 endif
 
 if !exists('g:windows_filename')
