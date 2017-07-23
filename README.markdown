@@ -44,9 +44,23 @@ Do vim stuff?
 #### Step 5: Contribute
 It's always a good idea to give back!
 
-
 Options
 --------------------------------------------------------------------------------
+After following the isntallation instructions and (hopefully) don't have any
+problems, you should be good to go. If you do face issues or want to customize
+how the plugin works, see the rest of this section.
+
+### `g:osplugin_debug`
+If for some reason you do face issues, you should consider enabling it.
+Otherwise, leave it to it's default value. With it enabled, you will see
+messages telling you how the plugin initilzation process went. It's fairly basic
+so far, but I plan to improve on it once I get a better understanding of vim
+script.
+
+Default:
+```viml
+let g:osplugin_debug = 0
+```
 
 Functions
 --------------------------------------------------------------------------------
