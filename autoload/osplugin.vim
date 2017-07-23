@@ -20,8 +20,16 @@ if !exists('g:macOS')
     let g:macOS = has('macunix')
 endif
 
-if !exists('g:auto_create_directory')
-    let g:auto_create_directory = 0
+if !exists('g:linux_filename')
+    let g:linux_filename = "linux"
+endif
+
+if !exists('g:windows_filename')
+    let g:windows_filename = "windows.vim"
+endif
+
+if !exists('g:macOS_filename')
+    let g:macOS_filename = "macOS.vim"
 endif
 
 if !exists('g:auto_create_file')
@@ -36,16 +44,8 @@ if !exists('g:osplugin_dir')
     endif
 endif
 
-if !exists('g:linux_filename')
-    let g:linux_filename = "linux"
-endif
-
-if !exists('g:windows_filename')
-    let g:windows_filename = "windows.vim"
-endif
-
-if !exists('g:macOS_filename')
-    let g:macOS_filename = "macOS.vim"
+if !exists('g:auto_create_directory')
+    let g:auto_create_directory = 0
 endif
 
 if !exists('s:osplugin_custom_config')
