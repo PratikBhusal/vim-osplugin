@@ -62,6 +62,83 @@ Default:
 let g:osplugin_debug = 0
 ```
 
+### `g:linux`
+(Insert text here)
+
+Default:
+```viml
+let g:osplugin_debug = has('unix') && !has('macunix') && !has('win32unix')
+```
+
+### `g:windows`
+(Insert text here)
+
+Default:
+```viml
+let g:windows = has('win32') || has('win64')
+```
+
+### `g:macOS`
+(Insert text here)
+
+Default:
+```viml
+let g:macOS = has('macunix')
+```
+
+### `g:linux_filename`
+(Insert text here)
+
+Default:
+```viml
+let g:linux_filename = "linux.vim"
+```
+
+### `g:windows_filename`
+(Insert text here)
+
+Default:
+```viml
+let g:windows_filename = "windows.vim"
+```
+
+### `g:macOS_filename`
+(Insert text here)
+
+Default:
+```viml
+let g:macOS_filename = "macOS.vim"
+```
+
+### `g:auto_create_file`
+(Insert text here)
+
+Default:
+```viml
+let g:auto_create_file = 0
+```
+
+### `g:osplugin_dir`
+(Insert text here)
+
+Default (On Unix Systems):
+```viml
+let g:osplugin_dir = expand("$HOME/.vim/osplugin")
+```
+
+Default (On Windows):
+```viml
+let g:osplugin_dir = expand("$HOME/vimfiles/osplugin")
+```
+
+### `g:auto_create_directory`
+(Insert text here)
+
+Default:
+```viml
+let g:auto_create_directory = 0
+```
+
 Functions
 --------------------------------------------------------------------------------
 
