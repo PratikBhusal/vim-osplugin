@@ -4,11 +4,10 @@ vim-osplugin: Easily source OS-specific configuration files
 Table of Contents
 --------------------------------------------------------------------------------
 - [Installation](#installation)
-- [Feature Summary](#feature-summary)
-- [Todo](#todo)
 - [Options](#options)
 - [Functions](#functions)
 - [FAQ](#faq)
+- [Todo](#todo)
 - [License](#license)
 
 Feature Summary
