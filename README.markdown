@@ -151,9 +151,19 @@ let g:auto_create_directory = 0
 
 Functions
 --------------------------------------------------------------------------------
+### `osplugin#begin`
+This function lets all the magic happen. If your OS is recognized by default and
+that is all you care about, you do not have to worry abut this. Otherwise, this
+will allow you to open other configuration files **after** you have let your
+plugin manager load the plugin. For example, if you want to load android
+specific configurations and your plugin manager of choice is [vim-plug](Plug):
 
-Custom File Sourcing
---------------------------------------------------------------------------------
+```viml
+call plug#end()
+if has('android')
+    call osplugin#begin('android.vim')
+endif
+```
 
 FAQ
 --------------------------------------------------------------------------------
