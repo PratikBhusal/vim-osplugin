@@ -10,9 +10,6 @@ Table of Contents
 - [Todo](#todo)
 - [License](#license)
 
-Feature Summary
---------------------------------------------------------------------------------
-
 Installation
 --------------------------------------------------------------------------------
 **Step 1: Install the plugin with your preferred plugin manager**
