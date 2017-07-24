@@ -172,8 +172,7 @@ None (so far).
 Todo
 --------------------------------------------------------------------------------
 - Bugfix on Linux and MacOS
-- Add documentation
-- Complete remaining README sections
+- Add a osplugin help file
 
 License
 --------------------------------------------------------------------------------
