@@ -67,15 +67,17 @@ let g:osplugin_debug = 0
 ```
 
 ### `g:linux`
-(Insert text here)
+The default check to see if you are on a linux distribution. You may also use
+the variable to check code blocks outside of the osplugin/\*.vim for the OS.
 
 **Default:**
 ```viml
-let g:osplugin_debug = has('unix') && !has('macunix') && !has('win32unix')
+let g:linux = has('unix') && !has('macunix') && !has('win32unix')
 ```
 
 ### `g:windows`
-(Insert text here)
+The default check to see if you are on Windows 95 and above. You may also use
+the variable to check code blocks outside of the osplugin/\*.vim for the OS.
 
 **Default:**
 ```viml
@@ -83,7 +85,8 @@ let g:windows = has('win32') || has('win64')
 ```
 
 ### `g:macOS`
-(Insert text here)
+The default check to see if you are on macOS. You may also use
+the variable to check code blocks outside of the osplugin/\*.vim for the OS.
 
 **Default:**
 ```viml
@@ -91,7 +94,7 @@ let g:macOS = has('macunix')
 ```
 
 ### `g:linux_filename`
-(Insert text here)
+The filename that osplugin checks for linux configurations
 
 **Default:**
 ```viml
@@ -99,7 +102,7 @@ let g:linux_filename = "linux.vim"
 ```
 
 ### `g:windows_filename`
-(Insert text here)
+The filename that osplugin checks for windows configurations
 
 **Default:**
 ```viml
@@ -107,7 +110,7 @@ let g:windows_filename = "windows.vim"
 ```
 
 ### `g:macOS_filename`
-(Insert text here)
+The filename that osplugin checks for macOS configurations
 
 **Default:**
 ```viml
@@ -115,7 +118,9 @@ let g:macOS_filename = "macOS.vim"
 ```
 
 ### `g:auto_create_file`
-(Insert text here)
+By default the user would have to manually create the files for osplugin to
+source the configurations. If you want the plugin to automatically create the
+files, set this to `1`.
 
 **Default:**
 ```viml
@@ -123,7 +128,7 @@ let g:auto_create_file = 0
 ```
 
 ### `g:osplugin_dir`
-(Insert text here)
+The directory that osplugin checks for the configuration files.
 
 **Default (On Unix Systems):**
 ```viml
@@ -136,7 +141,8 @@ let g:osplugin_dir = expand("$HOME/vimfiles/osplugin")
 ```
 
 ### `g:auto_create_directory`
-(Insert text here)
+By default the user would have to manually create directory. If you want the
+plugin to automatically create the directory, set this to `1`.
 
 **Default:**
 ```viml
