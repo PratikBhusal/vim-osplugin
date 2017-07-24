@@ -8,7 +8,6 @@ Table of Contents
 - [Todo](#todo)
 - [Options](#options)
 - [Functions](#functions)
-- [Custom File Sourcing](#custom-file-sourcing)
 - [FAQ](#faq)
 - [License](#license)
 
