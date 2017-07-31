@@ -127,9 +127,9 @@ endfunction
 " Error Function {{{1
 function! osplugin#error(error_number, ...)
     if a:error_number == 1
-        echom "Error 1: Could not determine operating system."
+        echoe "Could not determine operating system."
     elseif a:error_number == 2
-        echom "Error 2: Could not source " . a:1 . ". Is the file readable?"
+        echoe "Error 2: Could not source " . a:1 . ". Is the file readable?"
     endif
 endfunction
 "  1}}}
