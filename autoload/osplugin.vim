@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
     finish
 endif
-let g:loaded_osplugin = '0.6.0'
+let g:loaded_osplugin = '0.6.1'
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -56,10 +56,11 @@ if !exists('s:osplugin_custom_name')
 endif
 " }}}
 
-" Function to Call outside of the autload file {{{1
+" Function to Call outside of the autload file {{{
 function! osplugin#begin(...)
+
     if s:osplugin_custom_config == 1
-        call osplugin#main(s:osplugin_custom_name)
+        call <sid>main(s:osplugin_custom_name)
         if exists('a:1')
             let s:osplugin_custom_name = a:1
         endif
@@ -67,43 +68,43 @@ function! osplugin#begin(...)
         let s:osplugin_custom_config = 1
         let s:osplugin_custom_name = a:1
     else
-        call osplugin#main()
+        call <sid>main()
     endif
 endfunction
-"  1}}}
+"  }}}
 
 " Main Function {{{1
-function! osplugin#main(...)
+function! s:main(...)
     if g:auto_create_directory
         call osplugin#make_osplugin_directory()
     endif
 
     if exists('a:1')
-        call osplugin#initilize_os(a:1)
+        call <sid>initilize_os(a:1)
     elseif g:linux
-        call osplugin#initilize_os(g:linux_filename)
+        call <sid>initilize_os(g:linux_filename)
     elseif g:macOS
-        call osplugin#initilize_os(g:macOS_filename)
+        call <sid>initilize_os(g:macOS_filename)
     elseif g:windows
-        call osplugin#initilize_os(g:windows_filename)
+        call <sid>initilize_os(g:windows_filename)
     elseif g:osplugin_debug
-        call osplugin#error(1)
+        call <sid>error(1)
     endif
 endfunction
 "  1}}}
 
 " Automatic Folder Creation {{{
-function! osplugin#make_osplugin_directory()
-    if !isdirectory(expand(g:osplugin_dir))
+function! s:make_osplugin_directory()
+    if !isdirectory( expand(g:osplugin_dir) )
         call mkdir(expand(g:osplugin_dir), 'p')
     endif
 endfunction
 " }}}
 
 " Automatic File Creation {{{
-function! osplugin#make_osplugin_file(os_filename)
+function! s:make_osplugin_file(os_filename)
     let l:slash = ( (g:windows) ? '\' : '/' )
-    if !filereadable(expand(g:osplugin_dir) . l:slash . expand(a:os_filename))
+    if !filereadable( expand(g:osplugin_dir) . l:slash . expand(a:os_filename) )
         silent execute 'edit '  . expand(g:osplugin_dir) . l:slash . expand(a:os_filename)
         silent execute 'write ' . expand(g:osplugin_dir) . l:slash . expand(a:os_filename)
         silent execute 'bdelete'
@@ -112,9 +113,9 @@ endfunction
 " }}}
 
 " OS Config File Sourcing {{{
-function! osplugin#initilize_os(os_filename)
+function! s:initilize_os(os_filename)
     if g:auto_create_file
-        call osplugin#make_osplugin_file(a:os_filename)
+        call <sid>make_osplugin_file(a:os_filename)
     endif
 
     let l:slash = ( (g:windows) ? '\' : '/' )
@@ -127,17 +128,17 @@ function! osplugin#initilize_os(os_filename)
 
         " execute 'source ' . expand(g:osplugin_dir) . l:slash . expand(a:os_filename)
     elseif g:osplugin_debug
-        call osplugin#error(2, a:os_filename)
+        call <sid>error(2, a:os_filename)
     endif
 endfunction
 " }}}
 
 " Error Function {{{1
-function! osplugin#error(error_number, ...)
+function! s:error(error_number, ...)
     if a:error_number == 1
-        echoe "Could not determine operating system."
+        echoe 'Could not determine operating system.'
     elseif a:error_number == 2
-        echoe "Error 2: Could not source " . a:1 . ". Is the file readable?"
+        echoe 'Error 2: Could not source ' . a:1 . '. Is the file readable?'
     endif
 endfunction
 "  1}}}
