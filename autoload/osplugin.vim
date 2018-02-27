@@ -1,7 +1,7 @@
 if exists("g:loaded_osplugin") || &compatible
     finish
 endif
-let g:loaded_osplugin = "0.5.4"
+let g:loaded_osplugin = '0.6.0'
 
 " Global Variables {{{
 if !exists('g:osplugin_debug')
@@ -95,17 +95,18 @@ endfunction
 " Automatic Folder Creation {{{
 function! osplugin#make_osplugin_directory()
     if !isdirectory(expand(g:osplugin_dir))
-        call mkdir(expand(g:osplugin_dir), "p")
+        call mkdir(expand(g:osplugin_dir), 'p')
     endif
 endfunction
 " }}}
 
 " Automatic File Creation {{{
 function! osplugin#make_osplugin_file(os_filename)
-    if !filereadable(expand(g:osplugin_dir) . "\/" . expand(a:os_filename))
-        silent execute "edit " . expand(g:osplugin_dir) . "\/" . expand(a:os_filename)
-        silent execute "write " . expand(g:osplugin_dir) . "\/" . expand(a:os_filename)
-        silent execute "bdelete"
+    let l:slash = ( (g:windows) ? '\' : '/' )
+    if !filereadable(expand(g:osplugin_dir) . l:slash . expand(a:os_filename))
+        silent execute 'edit '  . expand(g:osplugin_dir) . l:slash . expand(a:os_filename)
+        silent execute 'write ' . expand(g:osplugin_dir) . l:slash . expand(a:os_filename)
+        silent execute 'bdelete'
     endif
 endfunction
 " }}}
@@ -113,11 +114,18 @@ endfunction
 " OS Config File Sourcing {{{
 function! osplugin#initilize_os(os_filename)
     if g:auto_create_file
-        call s:osplugin#make_osplugin_file(a:os_filename)
+        call osplugin#make_osplugin_file(a:os_filename)
     endif
 
-    if filereadable(expand(g:osplugin_dir) . "\/" . expand(a:os_filename))
-        execute "source " . expand(g:osplugin_dir) . "\/" . expand(a:os_filename)
+    let l:slash = ( (g:windows) ? '\' : '/' )
+    if filereadable(  expand(g:osplugin_dir) . l:slash .expand(a:os_filename) )
+        let &runtimepath .= ',' . g:osplugin_dir
+
+        execute 'verbose runtime '
+            \. get(split(g:osplugin_dir, l:slash), -1, 'osplugin')
+            \. l:slash . expand(a:os_filename)
+
+        " execute 'source ' . expand(g:osplugin_dir) . l:slash . expand(a:os_filename)
     elseif g:osplugin_debug
         call osplugin#error(2, a:os_filename)
     endif
