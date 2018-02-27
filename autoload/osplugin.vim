@@ -1,59 +1,37 @@
-if exists("g:loaded_osplugin") || &compatible
+if exists('g:loaded_osplugin') || &compatible
     finish
 endif
-let g:loaded_osplugin = '0.6.1'
+let g:loaded_osplugin = '0.6.2'
 
 " Global Variables {{{
-if !exists('g:osplugin_debug')
-    let g:osplugin_debug = 0
-endif
+let g:osplugin_debug = get(g:, 'osplugin_debug' , 1)
 
-if !exists('g:linux')
-    let g:linux = has('unix') && !has('macunix') && !has('win32unix')
-endif
+let g:linux = get( g:, 'linux', has('unix') && !has('macunix') && !has('win32unix') )
 
-if !exists('g:windows')
-    let g:windows = has('win32') || has('win64')
-endif
+let g:windows = get(g:, 'windows' , has('win32') || has('win64'))
 
-if !exists('g:macOS')
-    let g:macOS = has('macunix')
-endif
+let g:macOS = get( g:, 'macOS', has('macunix') )
 
-if !exists('g:linux_filename')
-    let g:linux_filename = "linux.vim"
-endif
+let g:linux_filename = get(g:, 'linux_filename', 'linux.vim')
 
-if !exists('g:windows_filename')
-    let g:windows_filename = "windows.vim"
-endif
+let g:windows_filename = get(g:, 'windows_filename', 'windows.vim')
 
-if !exists('g:macOS_filename')
-    let g:macOS_filename = "macOS.vim"
-endif
+let g:macOS_filename = get(g:, 'macOS_filename', 'macOS.vim')
 
-if !exists('g:auto_create_file')
-    let g:auto_create_file = 0
-endif
+let g:auto_create_file = get(g:, 'auto_create_file' , 1)
 
-if !exists('g:osplugin_dir')
-    if g:windows
-        let g:osplugin_dir = expand("$HOME/vimfiles/osplugin")
-    else
-        let g:osplugin_dir = expand("$HOME/.vim/osplugin")
-    endif
-endif
+let g:osplugin_dir = get(g:, 'osplugin_dir',
+        \( (g:windows)
+            \? expand('$HOME/vimfiles/osplugin')
+            \: expand('$HOME/.vim/osplugin')
+        \)
+    \)
 
-if !exists('g:auto_create_directory')
-    let g:auto_create_directory = 0
-endif
+let g:osplugin_auto_create_directory = get(g:, 'osplugin_auto_create_directory', 0)
 
-if !exists('s:osplugin_custom_config')
-    let s:osplugin_custom_config = 0
-endif
-if !exists('s:osplugin_custom_name')
-    let s:osplugin_custom_name = ''
-endif
+let g:osplugin_custom_config = get(g:, 'osplugin_custom_config', 0)
+
+let g:osplugin_custom_name = get(g:, 'osplugin_custom_name', '')
 " }}}
 
 " Function to Call outside of the autload file {{{
@@ -75,7 +53,7 @@ endfunction
 
 " Main Function {{{1
 function! s:main(...)
-    if g:auto_create_directory
+    if g:osplugin_auto_create_directory
         call osplugin#make_osplugin_directory()
     endif
 
