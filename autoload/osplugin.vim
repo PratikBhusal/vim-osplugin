@@ -1,19 +1,19 @@
 if exists('g:loaded_osplugin') || &compatible
     finish
 endif
-let g:loaded_osplugin = '0.6.3'
+let g:loaded_osplugin = '0.6.4'
 
 " Function to Call outside of the autload file {{{
 function! osplugin#begin(...)
 
-    if s:osplugin_custom_config == 1
-        call <sid>main(s:osplugin_custom_name)
+    if g:osplugin_custom_config == 1
+        call <sid>main(g:osplugin_custom_name)
         if exists('a:1')
-            let s:osplugin_custom_name = a:1
+            let g:osplugin_custom_name = a:1
         endif
     elseif exists('a:1')
-        let s:osplugin_custom_config = 1
-        let s:osplugin_custom_name = a:1
+        let g:osplugin_custom_config = 1
+        let g:osplugin_custom_name = a:1
     else
         call <sid>main()
     endif
