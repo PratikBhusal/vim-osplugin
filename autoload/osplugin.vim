@@ -1,7 +1,7 @@
 if exists('g:loaded_osplugin') || &compatible
     finish
 endif
-let g:loaded_osplugin = '0.6.4'
+let g:loaded_osplugin = '0.6.5'
 
 " Function to Call outside of the autload file {{{
 function! osplugin#begin(...)
@@ -22,7 +22,7 @@ endfunction
 
 " Main Function {{{1
 function! s:main(...)
-    if g:osplugin_auto_create_directory
+    if g:osplugin_auto_create_dir
         call osplugin#make_osplugin_directory()
     endif
 
@@ -61,7 +61,7 @@ endfunction
 
 " OS Config File Sourcing {{{
 function! s:initilize_os(os_filename)
-    if g:auto_create_file
+    if g:osplugin_auto_create_file
         call <sid>make_osplugin_file(a:os_filename)
     endif
 

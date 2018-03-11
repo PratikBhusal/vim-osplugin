@@ -1,2 +1,46 @@
-*osplugin.txt*  Easily Source OS-specific configuration files
- vim:tw=78:ts=8:ft=help:norl:
+*osplugin.txt*
+                                                                    *osplugin*
+
+==============================================================================
+CONTENTS                                                   *osplugin-contents*
+  1. Configuration...........................................|osplugin-config|
+
+==============================================================================
+CONFIGURATION                                                *osplugin-config*
+
+                                                            *g:osplugin_debug*
+Flag to enable or disable debug mode for osplugin.
+>
+    let g:osplugin_debug = 0
+<
+                                                              *g:osplugin_dir*
+Location of osplugin directory.
+
+On Windows: >
+    let g:osplugin_dir = expand('$HOME/vimfiles/osplugin')
+On anything else: >
+    let g:osplugin_dir = expand('$HOME/.vim/osplugin')
+<
+                                                  *g:osplugin_auto_create_dir*
+By default the user would have to manually create the directory. If you want
+the plugin to automatically create the directory, set this to `1`.
+>
+    let g:osplugin_auto_create_dir = 0
+<
+                                                                     *g:linux*
+Flag to see if you're on a (strictly) linux distribution. If you're using
+cygwin, include `has('win32unix')`.
+>
+    let g:linux = has('unix') && !has('macunix') && !has('win32unix')
+<
+                                                                   *g:windows*
+Flag to see if you're on Windows 95 and above.
+>
+    let g:windows = has('win32') || has('win64')
+<
+                                                                     *g:macOS*
+Flag to see if you're on macOS.
+>
+    let g:macOS = has('macunix')
+<
+vim:tw=78:ts=8:ft=help:norl:

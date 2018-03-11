@@ -62,9 +62,40 @@ script.
 let g:osplugin_debug = 0
 ```
 
+### `g:osplugin_dir`
+Location of osplugin directory.
+
+**Default (On Windows):**
+```viml
+let g:osplugin_dir = expand("$HOME/vimfiles/osplugin")
+```
+**Default (On anything else):**
+```viml
+let g:osplugin_dir = expand("$HOME/.vim/osplugin")
+```
+
+### `g:osplugin_auto_create_dir`
+By default the user would have to manually create the directory. If you want the
+plugin to automatically create the directory, set this to `1`.
+
+**Default:**
+```viml
+let g:osplugin_auto_create_dir = 0
+```
+
+### `g:osplugin_auto_create_file`
+By default the user would have to manually create the files for osplugin to
+source the configurations. If you want the plugin to automatically create the
+files, set this to `1`.
+
+**Default:**
+```viml
+let g:osplugin_auto_create_file = 0
+```
+
 ### `g:linux`
-The default check to see if you are on a linux distribution. You may also use
-the variable to check code blocks outside of the osplugin/\*.vim for the OS.
+Flag to see if you're on a (strictly) linux distribution. If you're using
+cygwin, include `has('win32unix')`.
 
 **Default:**
 ```viml
@@ -72,8 +103,7 @@ let g:linux = has('unix') && !has('macunix') && !has('win32unix')
 ```
 
 ### `g:windows`
-The default check to see if you are on Windows 95 and above. You may also use
-the variable to check code blocks outside of the osplugin/\*.vim for the OS.
+Flag to see if you're on Windows 95 and above.
 
 **Default:**
 ```viml
@@ -81,8 +111,7 @@ let g:windows = has('win32') || has('win64')
 ```
 
 ### `g:macOS`
-The default check to see if you are on macOS. You may also use
-the variable to check code blocks outside of the osplugin/\*.vim for the OS.
+Flag to see if you're on macOS.
 
 **Default:**
 ```viml
@@ -90,7 +119,7 @@ let g:macOS = has('macunix')
 ```
 
 ### `g:linux_filename`
-The filename that osplugin checks for linux configurations
+The filename that osplugin checks for linux configurations.
 
 **Default:**
 ```viml
@@ -98,7 +127,7 @@ let g:linux_filename = "linux.vim"
 ```
 
 ### `g:windows_filename`
-The filename that osplugin checks for windows configurations
+The filename that osplugin checks for windows configurations.
 
 **Default:**
 ```viml
@@ -106,43 +135,11 @@ let g:windows_filename = "windows.vim"
 ```
 
 ### `g:macOS_filename`
-The filename that osplugin checks for macOS configurations
+The filename that osplugin checks for macOS configurations.
 
 **Default:**
 ```viml
 let g:macOS_filename = "macOS.vim"
-```
-
-### `g:auto_create_file`
-By default the user would have to manually create the files for osplugin to
-source the configurations. If you want the plugin to automatically create the
-files, set this to `1`.
-
-**Default:**
-```viml
-let g:auto_create_file = 0
-```
-
-### `g:osplugin_dir`
-The directory that osplugin checks for the configuration files.
-
-**Default (On Unix Systems):**
-```viml
-let g:osplugin_dir = expand("$HOME/.vim/osplugin")
-```
-
-**Default (On Windows):**
-```viml
-let g:osplugin_dir = expand("$HOME/vimfiles/osplugin")
-```
-
-### `g:auto_create_directory`
-By default the user would have to manually create directory. If you want the
-plugin to automatically create the directory, set this to `1`.
-
-**Default:**
-```viml
-let g:auto_create_directory = 0
 ```
 
 Functions
