@@ -1,19 +1,29 @@
-*osplugin.txt*
-                                                                    *osplugin*
-
+*osplugin.txt*  Easily source OS-specific configuration files
+*osplugin* *vim-osplugin*
+               _                                _             _              ~
+        __   _(_)_ __ ___        ___  ___ _ __ | |_   _  __ _(_)_ __         ~
+        \ \ / / | '_ ` _ \ ____ / _ \/ __| '_ \| | | | |/ _` | | '_ \        ~
+         \ V /| | | | | | |____| (_) \__ \ |_) | | |_| | (_| | | | | |       ~
+          \_/ |_|_| |_| |_|     \___/|___/ .__/|_|\__,_|\__, |_|_| |_|       ~
+                                         | |             __/ |               ~
+                                         |_|            |___/                ~
 ==============================================================================
 CONTENTS                                                   *osplugin-contents*
+
   1. Configuration...........................................|osplugin-config|
+  2. Functions............................................|osplugin-functions|
+  3. License................................................|osplugin-license|
 
 ==============================================================================
 CONFIGURATION                                                *osplugin-config*
 
-                                                            *g:osplugin_debug*
-Flag to enable or disable debug mode for osplugin.
+---------------------------------------                   *g:osplugin_verbose*
+Flag to enable or disable verbose mode. Enabling this also shows which
+configuration files were sourced by the `g:osplugin_initilized_files` variable.
 >
-    let g:osplugin_debug = 0
+    let g:osplugin_verbose = 0
 <
-                                                              *g:osplugin_dir*
+---------------------------------------                       *g:osplugin_dir*
 Location of osplugin directory.
 
 On Windows: >
@@ -21,26 +31,49 @@ On Windows: >
 On anything else: >
     let g:osplugin_dir = expand('$HOME/.vim/osplugin')
 <
-                                                  *g:osplugin_auto_create_dir*
+---------------------------------------           *g:osplugin_auto_create_dir*
 By default the user would have to manually create the directory. If you want
 the plugin to automatically create the directory, set this to `1`.
 >
     let g:osplugin_auto_create_dir = 0
 <
-                                                                     *g:linux*
-Flag to see if you're on a (strictly) linux distribution. If you're using
-cygwin, include `has('win32unix')`.
+---------------------------------------          *g:osplugin_auto_create_file*
+By default the user would have to manually create the file(s) for osplugin to
+source the configurations. If you want the plugin to automatically create the
+file(s), set this to `1`.
 >
-    let g:linux = has('unix') && !has('macunix') && !has('win32unix')
+    let g:osplugin_auto_create_file = 0
 <
-                                                                   *g:windows*
-Flag to see if you're on Windows 95 and above.
+==============================================================================
+FUNCTIONS                                                 *osplugin-functions*
+
+---------------------------------------                      *osplugin#init()*
+osplugin#init({os_filename})
+
+Adds {os_filename} to the list of configuration files to source. If
+`g:osplugin_auto_create_file` is enabled and {os_filename} is unreadable, then
+it also creates a blank file.
+
+For example, if you want to load cygwin and linux specific configurations:
 >
-    let g:windows = has('win32') || has('win64')
+    if g:cygwin
+        call osplugin#init('cygwin.vim')
+        call osplugin#init('linux.vim')
+    endif
 <
-                                                                     *g:macOS*
-Flag to see if you're on macOS.
->
-    let g:macOS = has('macunix')
-<
+---------------------------------------                     *osplugin#begin()*
+osplugin#begin()
+
+Sources all the provided configuration files from `osplugin#init()`. This
+function is where all the magic happens. If `g:osplugin_verbose` is enabled,
+it also initializes a variable called `g:osplugin_initilized_files` that
+stores which os configuration files were sources.
+
+Note: This command is ran automatically and is only recommended to use outside
+of its intended purpose for debugging purposes.
+
+==============================================================================
+LICENSE                                                     *osplugin-license*
+MIT License. Copyright © 2017-2018 Pratik Bhusal
+
 vim:tw=78:ts=8:ft=help:norl:

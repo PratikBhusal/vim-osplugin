@@ -32,9 +32,7 @@ edit out of the box, see the [options](#glinux_filename) section.
 
 The default directory is `$HOME/.vim/osplugin` on Unix systems and
 `$HOME/vimfiles/osplugin` on Windows. If you want to change the directory or
-have it automatically generated for you, see the [options](#gosplugin_dir)
-section. If your OS of choice is not recognized by default, see the [functions](
-#functions) section on how to fix the issue.
+have it automatically generated for you, see the [options](#gosplugin_dir) section.
 
 **Step 4: ???**
 
@@ -46,30 +44,29 @@ It's always a good idea to give back!
 
 Options
 --------------------------------------------------------------------------------
-After following the isntallation instructions and (hopefully) don't have any
+After following the installation instructions and (hopefully) don't have any
 problems, you should be good to go. If you do face issues or want to customize
 how the plugin works, see the rest of this section.
 
-### `g:osplugin_debug`
-If for some reason you do face issues, you should consider enabling it.
+### `g:osplugin_verbose`
+If for some reason you do face issues, you should consider enabling this.
 Otherwise, leave it to it's default value. With it enabled, you will see
-messages telling you how the plugin initilzation process went. It's fairly basic
-so far, but I plan to improve on it once I get a better understanding of vim
-script.
+messages telling you how about any potential issues osplugin faced when sourcing
+files.
 
 **Default:**
 ```viml
-let g:osplugin_debug = 0
+let g:osplugin_verbose = 0
 ```
 
 ### `g:osplugin_dir`
 Location of osplugin directory.
 
-**Default (On Windows):**
+**Default On Windows:**
 ```viml
 let g:osplugin_dir = expand("$HOME/vimfiles/osplugin")
 ```
-**Default (On anything else):**
+**Default On anything else:**
 ```viml
 let g:osplugin_dir = expand("$HOME/.vim/osplugin")
 ```
@@ -93,70 +90,30 @@ files, set this to `1`.
 let g:osplugin_auto_create_file = 0
 ```
 
-### `g:linux`
-Flag to see if you're on a (strictly) linux distribution. If you're using
-cygwin, include `has('win32unix')`.
-
-**Default:**
-```viml
-let g:linux = has('unix') && !has('macunix') && !has('win32unix')
-```
-
-### `g:windows`
-Flag to see if you're on Windows 95 and above.
-
-**Default:**
-```viml
-let g:windows = has('win32') || has('win64')
-```
-
-### `g:macOS`
-Flag to see if you're on macOS.
-
-**Default:**
-```viml
-let g:macOS = has('macunix')
-```
-
-### `g:linux_filename`
-The filename that osplugin checks for linux configurations.
-
-**Default:**
-```viml
-let g:linux_filename = "linux.vim"
-```
-
-### `g:windows_filename`
-The filename that osplugin checks for windows configurations.
-
-**Default:**
-```viml
-let g:windows_filename = "windows.vim"
-```
-
-### `g:macOS_filename`
-The filename that osplugin checks for macOS configurations.
-
-**Default:**
-```viml
-let g:macOS_filename = "macOS.vim"
-```
-
 Functions
 --------------------------------------------------------------------------------
-### `osplugin#begin`
-This function lets all the magic happen. If your OS is recognized by default and
-that is all you care about, you do not have to worry abut this. Otherwise, this
-will allow you to open other configuration files **after** you have let your
-plugin manager load the plugin. For example, if you want to load android
-specific configurations and your plugin manager of choice is [vim-plug](Plug):
+### `osplugin#init({os_filename})`
+Adds {os_filename} to the list of configuration files to source. If
+`g:osplugin_auto_create_file` is enabled and {os_filename} is unreadable, then
+it also creates a blank file.
+
+For example, if you want to load cygwin and linux specific configurations:
 
 ```viml
-call plug#end()
-if has('android')
-    call osplugin#begin('android.vim')
+if g:cygwin
+    call osplugin#init('cygwin.vim')
+    call osplugin#init('linux.vim')
 endif
 ```
+
+### `osplugin#begin()`
+This function is where all the magic happens. It runs all the provided
+configuration files from `osplugin#init()`. If `g:osplugin_verbose` is enabled,
+it also initializes a variable called `g:osplugin_initilized_files` that stores
+which os configuration files were sources.
+
+**Note:** This command is ran automatically and is only recommended to use outside
+of its intended purpose for debugging purposes.
 
 FAQ
 --------------------------------------------------------------------------------
@@ -165,11 +122,11 @@ None (so far).
 Todo
 --------------------------------------------------------------------------------
 - Bugfix on Linux and MacOS
-- Add a osplugin help file
+- After directory support
 
 License
 --------------------------------------------------------------------------------
-MIT License. Copyright © 2017 Pratik Bhusal & Contributors.
+MIT License. Copyright © 2017-2018 Pratik Bhusal
 
 [Dein]: https://github.com/Shougo/dein.vim
 [Pathogen]: https://github.com/tpope/vim-pathogen
