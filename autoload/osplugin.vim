@@ -43,7 +43,10 @@ function! osplugin#begin()
         call s:make_osplugin_directory()
     endif
 
-    let s:files_to_initilize = uniq( sort(s:files_to_initilize) )
+    let s:files_to_initilize = sort(s:files_to_initilize)
+    let s:files_to_initilize = ( exists("*uniq()") )
+        \? uniq(s:files_to_initilize)
+        \: s:uniq(s:files_to_initilize)
 
     for l:os_filename in s:files_to_initilize
         execute 'verbose runtime '
@@ -76,6 +79,21 @@ function! s:make_osplugin_file(os_filename)
         silent execute 'write ' . expand(g:osplugin_dir) . s:slash . expand(a:os_filename)
         silent execute 'bdelete'
     endif
+endfunction
+" }}}
+
+" Custom Fuction to find unique elements in list {{{
+function! s:uniq(file_list)
+    let l:index = 0
+    while l:index < len(a:file_list)
+       while a:file_list[l:index] ==# get(a:file_list, index+1, '')
+            call remove(a:file_list, index+1)
+        endwhile
+
+        let l:index += 1
+    endwhile
+
+    return a:file_list
 endfunction
 " }}}
 
