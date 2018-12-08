@@ -80,19 +80,28 @@ plugin to automatically create the directory, set this to `1`.
 let g:osplugin_auto_create_dir = 0
 ```
 
-### `g:osplugin_auto_create_file`
-By default the user would have to manually create the files for osplugin to
+### `g:osplugin_auto_create_os_file`
+By default the user would have to manually create the file(s) for osplugin to
 source the configurations. If you want the plugin to automatically create the
-files, set this to `1`.
+file(s), set this to `1`.
 
 **Default:**
 ```viml
-let g:osplugin_auto_create_file = 0
+let g:osplugin_auto_create_os_file = 0
 ```
 
+### `g:osplugin_auto_create_os_folder`
+By default the user would have to manually create the folder(s) for osplugin to
+source the configurations. If you want the plugin to automatically create the
+folder(s), set this to `1`.
+
+**Default:**
+```viml
+let g:osplugin_auto_create_os_folder = 0
+```
 Functions
 --------------------------------------------------------------------------------
-### `osplugin#init({os_filename})`
+### `osplugin#init({os_name})`
 Adds {os_filename} to the list of configuration files to source. If
 `g:osplugin_auto_create_file` is enabled and {os_filename} is unreadable, then
 it also creates a blank file.
@@ -101,28 +110,18 @@ For example, if you want to load cygwin and linux specific configurations:
 
 ```viml
 if g:cygwin
-    call osplugin#init('cygwin.vim')
-    call osplugin#init('linux.vim')
+    call osplugin#init('cygwin')
+    call osplugin#init('linux')
 endif
 ```
-
-### `osplugin#begin()`
-This function is where all the magic happens. It runs all the provided
-configuration files from `osplugin#init()`. If `g:osplugin_verbose` is enabled,
-it also initializes a variable called `g:osplugin_initilized_files` that stores
-which os configuration files were sources.
-
-**Note:** This command is ran automatically and is only recommended to use outside
-of its intended purpose for debugging purposes.
-
 FAQ
 --------------------------------------------------------------------------------
 None (so far).
 
 Todo
 --------------------------------------------------------------------------------
-- Bugfix on Linux and MacOS
-- After directory support
+- Bugfix on Linux
+- After after/ directory support
 
 License
 --------------------------------------------------------------------------------
