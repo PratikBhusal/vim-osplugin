@@ -82,7 +82,7 @@ endfunction
 
 " Automatic os folder Creation {{{
 function! s:make_os_directory(os)
-    if !isdirectory( expand(g:osplugin_dir . s:slash . expand(a:os) )
+    if !isdirectory(expand( g:osplugin_dir . s:slash . expand(a:os) ) )
         call mkdir(expand( g:osplugin_dir . s:slash . expand(a:os) ), 'p')
     endif
 endfunction
